@@ -1,4 +1,4 @@
-package part1_records;
+package advanced_features.part1_records;
 
 import org.junit.jupiter.api.Test;
 
