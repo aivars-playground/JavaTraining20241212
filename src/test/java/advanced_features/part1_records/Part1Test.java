@@ -26,8 +26,8 @@ public class Part1Test {
             }
         }
 
-        var person = new Person("first","","last");
-        System.out.println(person);                 //Person[firstName=first, middleName=, lastName=last]
+        var person = new Person("left","","last");
+        System.out.println(person);                 //Person[firstName=left, middleName=, lastName=last]
         System.out.println(person.middleName());    //[unknown]
 
         var clone = new Person(person.firstName(),person.middleName(),person.lastName());
