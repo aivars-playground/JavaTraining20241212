@@ -1,4 +1,4 @@
-package advanced_features.part6_lambdas.part5_generics;
+package advanced_features.part6_lambdas;
 
 import org.junit.jupiter.api.Test;
 

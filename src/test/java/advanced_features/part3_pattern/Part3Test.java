@@ -119,7 +119,7 @@ public class Part3Test {
         );
 
         var nameCountry  = switch (shipment) {
-            case Shipment(Customer(var firstName, var ignored), Address(var ignored1, var ignored2, var country), var ignored3) -> {
+            case Shipment(Customer(var firstName, _), Address(_, _, var country), _) -> {
                 yield  firstName +"@"+ country;}
         };
         assertEquals("name@UK", nameCountry);
