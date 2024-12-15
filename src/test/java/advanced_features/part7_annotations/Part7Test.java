@@ -1,4 +1,4 @@
-package advanced_features.part7_annotations.part6_lambdas;
+package advanced_features.part7_annotations;
 
 import org.junit.jupiter.api.Test;
 
