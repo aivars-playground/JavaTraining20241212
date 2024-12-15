@@ -7,6 +7,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class Part2Test {
 
@@ -89,6 +90,32 @@ public class Part2Test {
         System.out.println("bestResult:"+bestResult);
 
     }
+
+
+
+    @Test
+    void test_future_split_get_all_mix() throws InterruptedException {
+        CompletableFuture<Quotation> quotation = CompletableFuture.supplyAsync(prepare_supplier("supplier1_price", 100));
+        CompletableFuture<WeatherForecast> forecast = CompletableFuture.supplyAsync(prepare_forecast_supplier("server_1", 101));
+
+        List<CompletableFuture<?>> futures = List.of(quotation,forecast);
+        CompletableFuture[] array = futures.toArray(CompletableFuture[]::new);  //loosing type!!!!
+
+        CompletableFuture<Void> allOf = CompletableFuture.allOf(array);  //array as vararg
+
+        Stream<?> streamOfDifferentTypes = allOf.thenApply(v ->   //ignore v, it is marker of completion
+                futures.stream()
+                        .map(CompletableFuture::join)
+        ).join();
+
+        streamOfDifferentTypes.forEach(System.out::println);
+
+        System.out.println("individual results");
+        quotation.thenAccept(System.out::println);
+        forecast.thenAccept(System.out::println);
+
+    }
+
 
 
 
