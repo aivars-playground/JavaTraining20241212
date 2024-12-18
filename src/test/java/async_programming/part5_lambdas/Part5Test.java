@@ -3,10 +3,9 @@ package async_programming.part5_lambdas;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.text.html.Option;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.function.*;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -197,6 +196,57 @@ public class Part5Test {
         BiConsumer<Integer, String> biConsumer = (k,v) -> System.out.println("k:"+k+",v:"+v);
         map.forEach((k,v)-> System.out.println(k+":"+v));
 
+    }
+
+    @Test
+    void test_method_reference() {
+
+        //supplier
+        Supplier<List<String>> stringList=
+            () -> new ArrayList<>();
+
+        Supplier<List<String>> stringListMethodRef=
+                ArrayList<String>::new;
+
+        Consumer<String> printer =
+                s -> System.out.println(s);
+
+        Consumer<String> printerMethodref =
+                System.out::println;
+
+        Predicate<String> isEmpty =
+                s -> s.isEmpty();
+
+        Predicate<String> isEmptyMethodref =
+                String::isEmpty;
+
+        Predicate<String> isNotNull =
+                Objects::nonNull;
+
+        System.out.println("null is not empty: "+isNotNull.and(isEmpty).test(null));
+
+
+        BiFunction<String,String,Integer> indexOf =
+                (left, right) -> left.indexOf(right);
+
+        BiFunction<String,String,Integer> indexOfMethod =
+                String::indexOf;
+
+        System.out.println(indexOf.apply("aaaqwerty","wer"));
+        System.out.println(indexOfMethod.apply("aaaqwerty","wer"));
+
+        UnaryOperator<Integer> square = i -> i^2;
+
+        Supplier<List<String>> ls = ArrayList::new;
+
+        Function<Integer,List<String>> als = size -> new ArrayList(size);
+        Function<Integer,List<String>> als2 = ArrayList::new;
+
+        Function<Integer,Integer[]> ars = size -> new Integer[size];
+        Function<Integer,Integer[]> ars2 = Integer[]::new;
+
+        BiFunction<Integer,Integer,Point> pt = Point::new;
+        System.out.println(pt.apply(1,2));
     }
 
 }
